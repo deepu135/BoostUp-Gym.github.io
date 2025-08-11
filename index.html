@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NextGen Code School</title>
+  <style>
+    /* === RESET & BASE === */
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: 'Segoe UI', sans-serif; background: #111; color: #fff; transition: 0.4s;}
+    a {text-decoration: none; color: inherit;}
+    ul {list-style: none;}
+
+    /* === HEADER === */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: #000;
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+    }
+    .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #00bcd4;
+    }
+    nav ul {
+      display: flex;
+      gap: 25px;
+    }
+    nav ul li a {
+      font-size: small;
+      font-weight: 600;
+      position: relative;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      height: 2px;
+      width: 0%;
+      background: #00bcd4;
+      transition: 0.3s;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* === TOGGLE === */
+    .theme-toggle {
+      cursor: pointer;
+      background: #222;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid #00bcd4;
+    }
+
+    /* === SLIDER === */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.slider {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out, transform 3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1.1); /* Zoom-in effect */
+  z-index: 1;
+}
+
+.slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 1;
+}
+
+.slide-content {
+  position: relative;
+  z-index: 2;
+  font-size: 3em;
+  text-shadow: black;
+  color: #fff;
+  text-align: center;
+  width: 70%;
+  line-height: 1.4;
+  padding: 20px;
+}
+
+    /* === SECTION === */
+    section {
+      padding: 80px 40px;
+      background: #121212;
+    }
+    h2 {
+      font-size: 2em;
+      margin-bottom: 40px;
+      color: #00bcd4;
+      text-align: center;
+    }
+
+    /* === SERVICES === */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+    .service {
+      background: #1f1f1f;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s;
+      border: 1px solid #00bcd4;
+    }
+    .service:hover {
+      transform: scale(1.05);
+    }
+    .service img {
+      width: 50px;
+      margin-bottom: 15px;
+    }
+
+    /* === PROJECTS === */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .project {
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+    .project img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .project:hover {
+      transform: translateY(-10px);
+    }
+    .project .info {
+      padding: 15px;
+      background: #111;
+    }
+
+    /* === CONTACT === */
+    .contact {
+      text-align: center;
+      font-size: 1.2em;
+      background: #181818;
+      padding: 50px;
+      border-radius: 10px;
+    }
+
+    /* === GALLERY === */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.4s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
+
+    /* === FOOTER === */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 40px;
+      text-align: center;
+    }
+
+    /* === LIGHT THEME === */
+    body.light {
+      background: #fff;
+      color: #000;
+    }
+    body.light header, body.light footer {
+      background: #f1f1f1;
+      color: #000;
+    }
+    
+    body.light nav ul li a::after {
+      background: #0077cc;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .slide-content {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- === HEADER === -->
+  <header>
+    <div class="logo">NextGen Code School</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="aboutuspage.html">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="contactpage.html">Contact Us</a></li>
+      </ul>
+    </nav>
+    <div class="theme-toggle" onclick="toggleTheme()">Toggle Theme</div>
+  </header>
+
+   <!-- === SLIDER === -->
+  <div class="slider">
+    <div class="slide active" style="background-image: url('image/bg.jpg');">
+      <div class="slide-content">NextGen Code School empowers students with industry-grade coding skills to excel in the digital era.</div>
+    </div>
+    <div class="slide" style="background-image: url('image/bg1.jpg');">
+      <div class="slide-content">We provide hands-on programming experience and futuristic tech training for every learner.</div>
+    </div>
+    <div class="slide" style="background-image: url('image/bg2.jpg');">
+      <div class="slide-content">Join us to unlock your potential and become a part of the next generation of developers.</div>
+  </div>
+  </div>
+
+  <!-- === SERVICES === --><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="stylesheet" href="styleupp.css">
+   <link rel="stylesheet" href="javascriptup.js">
+  <title>BoostUp Gym</title>
+ 
+</head>
+<body>
+<nav>
+  <div class="nav__logo">
+  <a href="#"><img src="image/btuplogo.png" alt="logo"></a></div>
+  <div class="part2">
+         <a href="#home">Home</a>
+            <a href="#EXPLORE OUR PROGRAM">Program</a>
+                 <a href="#service">Services</a>
+                        <a href="#plan">Plan</a>
+                              <a href="#contact">Contact Us</a>
+    
+    <button class="btn" id="cont">Join Now</button>
+  </div>
+</nav>
+<header class="section__container header__container" id="home">
+  <div class="header__content">
+    <span class="bg__color"></span>
+    <span class="bg__color header__blur"></span>
+    <h4>BEST FITNESS IN THE TOWN</h4>
+    <h1> <span>MAKE </span>YOUR BODY SHAPE</h1>
+    <p>
+      Unleash your potential and embark on a journey towards a stronger,
+      fitter,and more confident you. Sign up for 'Make Your Body Shape' now 
+      and witness the incredible transformation your body is capable of!
+    </p>
+    <button class="btn"  >Get Started</button>
+  </div>
+  <div class="header__image">
+    <img src="image/hlogo.png" alt="header">
+  </div>
+</header>
+
+<sectiion class="section__container  explore__container" id="EXPLORE OUR PROGRAM">
+  <div class="explore__header">
+    <h2 class="section__header">EXPLORE OUR PROGRAM</h2>
+    <div class="explore__nav">
+    <span><i class="ri-arrow-left-line"></i></span>
+    <span><i class="ri-arrow-right-line"></i></span>
+  </div>
+  </div>
+  <div class="explore__grid">
+  <div class="explore__card">
+  <span><i class="ri-boxing-line"></i></span>
+  <h4>Strength</h4>
+  <p>
+Embrace the essence of strength as we delve into its various
+ dimensions physical, mental, and emotional.
+  </p>
+      <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+</div>
+ <div class="explore__card">
+  <span> <i class="ri-run-line"></i></span>
+  <h4>Physical Fitness</h4>
+  <p>
+    It encompasses a range of activities that improve health, strength,
+    flexiblity, and overall well-being.
+  </p>
+      <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+</div>
+ <div class="explore__card">
+  <span> <i class="ri-run-line"></i></span>
+  <h4>Fat Lose</h4>
+  <p>
+    Through a combination of workout routines and expert guidance, we'll
+    empower you to reach your goals.
+  </p>
+      <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+</div>
+<div class="explore__card">
+  <span><i class="ri-shopping-basket-fill"></i></span>
+  <h4>Weight Gain</h4>
+  <p>
+    Designed for individuals, our program offers an effective approach
+     to gaining weight in sustainable manner.
+  </p>
+      <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+</div>
+</div>
+</sectiion>
+<section class="section__container class__container" >
+<div class="class__image">
+  <span class="bg__blur"></span>
+  <img src="image/cls2.jpg" alt="class" class="class__img-1">
+    <img src="image/cls1.jpg" alt="class" class="class__img-2">
+</div>
+<div class="class__content">
+  <h2 class="section__header">THE CLASS YOU WILL GET HERE</h2>
+  <p>
+    Led by our team of expert and motivaitional instructors, "The Class You 
+    Will Get Here" is a high-energy, results-driven session that comnines
+    a perfect blend of cardio, strength training, and functional 
+    exercises. Each class is carefully curated to keep you engaged and 
+    challenged, ensuring youu never hit a plateau in your Fitness
+    endeavors.
+  </p>
+  <button class="btn">Book A Class</button>
+</div>
+</section>
+<section class="section__container join__container" id="service">
+<h2 class="section__header">WHY JOIN US</h2>
+<p class="section__subheader">
+  Our diverse membership base createds a friendly and supportive 
+  atomosphere, where you can make friends and stay motivated.
+</p>
+<div class="join__image">
+  <img src="image/join.jpg" alt="Join">
+  <div class="join__grid">
+    <div class="join__card">
+      <span><i class="ri-user-star-fill"></i></span>
+      <div class="join__card__content">
+      <h4>Personal Trainer</h4>
+      <p>Unlock your potential with our expert Personal Trainers. </p>
+        </div>
+      </div>
+       <div class="join__card">
+      <span><i class="ri-vidicon-fill"></i></span>
+      <div class="join__card__content">
+      <h4>Practive Sessions</h4>
+      <p>Elevate your fitness with practice sessions.</p>
+        </div>
+    </div>
+     <div class="join__card">
+      <span><i class="ri-building-line"></i></span>
+      <div class="join__card__content">
+      <h4>Good Management</h4>
+      <p>Supportive management, for your fitness succcess.</p>
+        </div>
+  </div>
+</div>
+</div>
+</section>
+<section class="section__container price__container" id="plan">
+  <h2 class="section__header">OUR PRICING PLAN</h2>
+  <p class="section__subheader">
+    Our pricing plan comes with various membership tiers, each tailored to 
+    cater to different prefernces and fitness aspirations.
+  </p>
+  <div class="price__grid">
+    <div class="price__card">
+      <div class="price__card__content">
+        <h4>Basic Plan</h4>
+        <h3>$16</h3>
+        <p>
+          <i class="ri-checkbox-circle-line"></i>
+          Smart workout plan
+        </p>
+         <p>
+          <i class="ri-checkbox-circle-line"></i>
+          At home workouts
+        </p>
+      </div>
+      <button class="btn price__btn">Join Now</button>
+    </div>
+     <div class="price__card">
+      <div class="price__card__content">
+        <h4>Weekly Plan</h4>
+        <h3>$25</h3>
+        <p>
+          <i class="ri-checkbox-circle-line"></i>
+          PRO Gyms
+        </p>
+         <p>
+          <i class="ri-checkbox-circle-line"></i>
+          Smart workout plan
+        </p>
+        <p>
+          <i class="ri-checkbox-circle-line"></i>
+          At home workouts
+        </p>
+      </div>
+      <button class="btn price__btn">Join Now</button>
+    </div>
+    <div class="price__card">
+      <div class="price__card__content">
+        <h4>Monthly Plan</h4>
+        <h3>$45</h3>
+        <p>
+          <i class="ri-checkbox-circle-line"></i>
+          ELITE Gyms & Classes
+        </p>
+         <p>
+          <i class="ri-checkbox-circle-line"></i>
+          PRO Gyms
+        </p>
+         <p>
+          <i class="ri-checkbox-circle-line"></i>
+          Smart workout plan
+        </p>
+         <p>
+          <i class="ri-checkbox-circle-line"></i>
+          At home workouts
+        </p>
+         <p>
+          <i class="ri-checkbox-circle-line"></i>
+          Personal Training
+        </p>
+      </div>
+      <button class="btn price__btn">Join Now</button>
+    </div>
+  </div>
+</section>
+<section class="review">
+  <div class="section__container review__container">
+    <span><i class="ri-double-quotes-r"></i></span>
+    <div class="review__content">
+      <h4>MEMBER REVIEW</h4>
+      <p>
+        What truly sets this gym apart is their expert team of trainers. The
+         trainers are knowledgeable, approachable, and genuinely invested in
+         helping members achieve their fitness goals. They take the time to 
+         understand individual needs and create personalized workout plans,
+         ensuring maximum results and safety.
+      </p>
+      <div class="review__rating">
+      <span><i class="ri-star-fill"></i></span>
+      <span><i class="ri-star-fill"></i></span>
+      <span><i class="ri-star-fill"></i></span>
+      <span><i class="ri-star-fill"></i></span>
+      <span><i class="ri-star-fill"></i></span>
+      <span><i class="ri-star-half-line"></i></span>
+    </div>
+    <div class="review__footer">
+      <div class="review__member">
+        <img src="image/clint.jpg" alt="member">
+        <div class="review__member__details">
+          <h4>Jane Cooper</h4>
+          <p>Software DeveloperS</p>
+        </div>
+      </div>
+      <div class="review__nav">
+        <span><i class="ri-arrow-left-line"></i></span>
+        <span><i class="ri-arrow-right-line"></i></span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="contact" class="contact-section"  >
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>We’d love to hear from you! Fill out the form below and we’ll get back to you as soon as possible.</p>
+
+    <div class="contact-wrapper">
+      <!-- Contact Form -->
+      <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p><strong>Address:</strong> Krishna Nagar , Kurukshetra - 136118 (Haryana) India</p>
+        <p><strong>Email:</strong> info@boostup.com</p>
+        <p><strong>Phone:</strong> 9034542004, 07942696942</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="section__container footer__container"  >
+  <span class="bg__blur"></span>
+  <span class="bg__blur footer__blur"></span>
+  <div class="footer__col">
+    <div class="footer__logo"><img src="image/btuplogo.png" alt="logo"></div>
+    <p>
+      Take the first step towards a healthier, stronger you with our 
+      unbeatable pricing plans. Let's sweat, achieve, and conquer together!
+    </p>
+    <div class="footer__socials">
+      <a href="https://www.facebook.com/boosupofficial/"><i class="ri-facebook-fill"></i></a>
+      <a href="https://www.instagram.com/boostupgymofficial/?hl=en"><i class="ri-instagram-line"></i></a>
+      <a href="https://www.youtube.com/"><i class="ri-youtube-line"></i></a>
+      <a href="https://www.twitter.com/"><i class="ri-twitter-fill"></i></a>
+    </div>
+  </div>
+   
+  <div class="footer__col">
+    <h4>Company</h4>
+    <a href="#">Business</a>
+    <a href="#">Franchise</a>
+    <a href="#">Partnership</a>
+    <a href="#">Network</a>
+  </div>
+   <div class="footer__col">
+    <h4>About Us</h4>
+    <a href="#">Blogs</a>
+    <a href="#">Security</a>
+    <a href="#">Careers</a>
+  </div>
+   <div class="footer__col">
+    <h4>Contact</h4>
+    <a href="#">Contact Us</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">BMI Calculator</a>
+  </div>
+</footer>
+<div class="footer__bar">
+   © 2025 BoostUp Gym. All rights reserved.
+   <br>
+
+Created by <span><a href="https://www.aumtech.solutions">AumTech Solution</a></span> 
+</div>
+  </body>
+  </html>
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055687.png"><p>Web Design</p></div>
+      <div class="service"><img src="https://cdn-icons-png.flaticon.com/512/906/906324.png"><p>App Development</p></div>
+      <div class="service"><img src="https://cdn-icons-png.flaticon.com/512/2721/2721290.png"><p>Machine Learning</p></div>
+      <div class="service"><img src="https://cdn-icons-png.flaticon.com/512/1907/1907427.png"><p>Cyber Security</p></div>
+      <div class="service"><img src="https://cdn-icons-png.flaticon.com/512/1011/1011760.png"><p>SEO Services</p></div>
+      <div class="service"><img src="https://cdn-icons-png.flaticon.com/512/201/201623.png"><p>Cloud Solutions</p></div>
+      <div class="service"><img src="https://cdn-icons-png.flaticon.com/512/1965/1965625.png"><p>UI/UX Design</p></div>
+      <div class="service"><img src="https://cdn-icons-png.flaticon.com/512/906/906334.png"><p>Tech Support</p></div>
+    </div>
+  </section>
+
+  <!-- === PROJECTS === -->
+  <section id="projects">
+    <h2>Our Projects</h2>
+    <div class="projects">
+      <div class="project"><img src="image/ilgmyzin-Xe21OFRpqvk-unsplash.jpg"><div class="info">Mobile App Development</div></div>
+      <div class="project"><img src="image/pexels-tranmautritam-326503.jpg"><div class="info">Admin Dashboard UI</div></div>
+      <div class="project"><img src="image/google-deepmind-ebMFfR2uuJ0-unsplash.jpg"><div class="info">Cyber Defense Platform</div></div>
+      <div class="project"><img src="image/ameer-basheer-xXc-7tdQr_I-unsplash.jpg"><div class="info">Cloud Storage Portal</div></div>
+    </div>
+  </section>
+
+
+  <!-- === GALLERY === -->
+  <section>
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="image/pexels-designecologist-1779487.jpg">
+      <img src="image/pexels-fauxels-3184611.jpg">
+      <img src="image/pexels-tranmautritam-245032.jpg">
+      <img src="image/pexels-tranmautritam-326503.jpg">
+      <img src="image/pexels-pixabay-355952.jpg">
+      <img src="image/pexels-shkrabaanthony-4348401.jpg">
+      <img src="image/pexels-mikhail-nilov-9242845.jpg">
+      <img src="image/pexels-joshsorenson-1714208.jpg">
+      <img src="image/bg.jpg">
+      <img src="image/pexels-fauxels-3183150.jpg">
+      <img src="image/hero image.jpg">
+            <img src="image/idea.png">
+
+                  <img src="image/pexels-tranmautritam-326514.jpg">
+
+                        <img src="image/pexels-pixabay-162539.jpg">
+
+    </div>
+  </section>
+
+  <!-- === FOOTER === -->
+  <footer>
+    <p>© 2025 NextGen Code School </p>
+  </footer>
+
+  <!-- === JS === -->
+    <script>
+    // Auto slider JavaScript
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 5000);
+  </script>
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle("light");
+    }
+  </script>
+
+</body>
+</html>
