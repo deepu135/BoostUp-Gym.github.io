@@ -1,5 +1,5 @@
 //navigation
-let icon = Document.querySelector(".icon");
+let icon = document.querySelector(".icon");
 let ul = document.querySelector("ul");
 
 icon.addEventListener("click", ()=>{
