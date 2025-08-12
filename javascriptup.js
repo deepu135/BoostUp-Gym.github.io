@@ -1,18 +1,16 @@
-//navigation
 let icon = document.querySelector(".icon");
-let ul = document.querySelector("ul");
+let ul = document.querySelector("nav ul");
+let barIcon = document.querySelector("#bar i");
 
-icon.addEventListener("click", ()=>{
+icon.addEventListener("click", () => {
   ul.classList.toggle("showData");
-  console.log(ul);
-  if(ul.className == "showData")
-  {
-    document.getElementById("bar").className="fa-solid fa-xmark";
+
+  if (ul.classList.contains("showData")) {
+    barIcon.className = "ri-close-line"; // close icon
+  } else {
+    barIcon.className = "ri-menu-line"; // menu icon
   }
-  else{
-    document.getElementById("bar").className="ri-menu-line";
-  }
-})
+});
 
 
 // Contact Form Validation
